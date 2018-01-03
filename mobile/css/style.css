@@ -1,0 +1,97 @@
+html, body {
+  margin:0;
+  padding:0;
+  font-family: "arial";
+  font-size:97.5%;
+  color:#646464;
+}
+
+#intro-wrapper {
+  margin:8px;
+  padding:16px;
+  background:#e2e2e2;
+}
+
+#intro {
+  background: #ffffff;
+  padding:8px;
+  border:1px dashed #a8a8a8;
+}
+
+#textblock {
+  margin:8px;
+  padding:16px;
+  background:#ffffff;
+}
+
+#content-wrapper {
+  margin:8px;
+  padding:16px;
+  background:#ffffaa;
+}
+
+.go-button {
+  width: 100%;
+  border: 0;
+  height:32px;
+  font-size:1em;
+}
+.vertical-space {
+    margin-bottom: 8px;
+}
+
+#go0-button {
+  background: #69c9ff;
+  color:#ffffff;
+}
+
+#go1-button {
+  background: #ff8969;
+  color:#ffffff;
+}
+
+#go2-button {
+  background: #6666aa;
+  color:#ffffff;
+}
+
+#go3-button {
+  background: #86c063;
+  color:#ffffff;
+}
+
+#result-wrapper {
+  margin:8px;
+  padding:16px;
+  background:#e2e2e2;
+}
+
+#result {
+  background: #ffffff;
+  padding:8px;
+  border:1px dashed #a8a8a8;
+  height:100px;
+  overflow-y: auto;
+  overflow-x: auto;
+}
+
+#version {
+  text-align:center;
+  padding:8px;
+  color:#363636;
+  font-size: 0.9em;
+}
+
+.label {
+  display: block;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+.text-input {
+  display:block;
+  width: 100%;
+  margin-bottom: 8px;
+  padding: 4px;
+  font-size: 1em;
+}

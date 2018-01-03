@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>AWCache Demo</title>
+    <link rel="stylesheet" href="css/style.css"></link>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="appworks.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+
+  </head>
+  <body>
+
+    <div id="intro-wrapper">
+      <div id="intro">
+        <div style="font-weight:bold; text-align:center; margin-bottom:8px;">AppWorks AWCache Demo</div>
+        <p>Write some content to the cache against a key</P>
+        <p>Read the content from the cache by using the same key</P>
+      </div>
+    </div>
+
+    <div id="content-wrapper">
+      <h3>Write to Cache</h3>
+      <label for="write-cache-key" class="label">Key</label>
+      <input type="text" id="write-cache-key" class="text-input" value="default" />
+
+      <label for="write-cache-content" class="label">Content</label>
+      <input type="text" id="write-cache-content" class="text-input" />
+
+      <div><button type="button" id="go0-button" class="go-button vertical-space" onclick="writeToCache();">Write</button></div>
+
+      <h3>Read from Cache</h3>
+      <label for="read-cache-key" class="label">Key</label>
+      <input type="text" id="read-cache-key" class="text-input" value="default" />
+      <div><button type="button" id="go1-button" class="go-button vertical-space" onclick="readFromCache();">Read</button></div>
+
+      <h3>Delete from Cache</h3>
+      <label for="delete-cache-key" class="label">Key</label>
+      <input type="text" id="delete-cache-key" class="text-input" value="default" />
+      <div><button type="button" id="go2-button" class="go-button vertical-space" onclick="deleteFromCache();">Delete</button></div>
+
+      <h3>Clear all Content From Cache</h3>
+      <div><button type="button" id="go3-button" class="go-button vertical-space" onclick="clearCache();">Clear Cache</button></div>
+    </div>
+
+    <div id="result-wrapper">
+      <div id="result">
+        Any output will appear here.
+      </div>
+    </div>
+
+    <div id="version">Version 0.0.1</div>
+
+  </body>
+</html>
