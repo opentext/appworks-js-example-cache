@@ -1,15 +1,23 @@
-/**
- * Write content to the cache with a key
- */
-function writeToCache() {
+document.addEventListener("deviceready", onDeviceReady, false);
+var cache = null;
+
+function onDeviceReady() {
   // Set the persistent storage to true to store the content until we specifically delete it
   var options = {
       usePersistentStorage: true
   };
+  cache = new Appworks.AWCache(options);
+  cache.preloadCache().then(function() {
+    console.log("Cache preloaded and raring to go");
+  }, function(err) {
+    console.log("Death");
+  });
+}
 
-  // Create an instance of AWCache with our options
-  var cache = new Appworks.AWCache(options);
-
+/**
+ * Write content to the cache with a key
+ */
+function writeToCache() {
   // The key to store the content against
   var key = document.getElementById("write-cache-key").value;
   // The content to store
@@ -31,14 +39,6 @@ function writeToCache() {
  * Read content from the cache with a key
  */
 function readFromCache() {
-  // Set the persistent storage to true to store the content until we specifically delete it
-  var options = {
-      usePersistentStorage: true
-  };
-
-  // Create an instance of AWCache with our options
-  var cache = new Appworks.AWCache(options);
-
   // The key to read the content from
   var key = document.getElementById("read-cache-key").value;
 
@@ -53,14 +53,6 @@ function readFromCache() {
  * Delete content from the cache with a key
  */
 function deleteFromCache() {
-  // Set the persistent storage to true to store the content until we specifically delete it
-  var options = {
-      usePersistentStorage: true
-  };
-
-  // Create an instance of AWCache with our options
-  var cache = new Appworks.AWCache(options);
-
   // The key to delete the content from
   var key = document.getElementById("delete-cache-key").value;
 
@@ -80,14 +72,6 @@ function deleteFromCache() {
  * Clear all content from the cache
  */
 function clearCache() {
-  // Set the persistent storage to true to store the content until we specifically delete it
-  var options = {
-      usePersistentStorage: true
-  };
-
-  // Create an instance of AWCache with our options
-  var cache = new Appworks.AWCache(options);
-
   // Call the clear function to remove all content
   cache.clear().then(
     // Success function

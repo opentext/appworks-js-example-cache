@@ -20,16 +20,17 @@ The purpose of the AWCache plugin is to store data, such as JSON, against a key 
 
 ## Usage
 
-#### setItem
+#### preloadCache
 
 ```javascript
-setItem(key: string, value: any)
+preloadCache()
 ```
 
-Write content to the cache with a key
+Obtain the data from the persistent cache and store it in memory. Returns a promise.
 
-+ __key__: The key to store the content against
-+ __value__: The content to store
+After you instantiate a new AWCache with the persistent option set to true, you must call the preloadCache method.
+
+It is recommended to only have one instance of AWCache used throughout your app.
 
 Examples
 ```javascript
@@ -38,9 +39,71 @@ var options = {
     usePersistentStorage: true
 };
 
-// Create an instance of AWCache with our options
-var cache = new Appworks.AWCache(options);
+// Ideally a single global instance of AWCache is instantiated.
+var cache = new AWCache(options);
 
+// Immediately load the persistent cache into memory
+cache.preloadCache().then(
+  // Success function
+  function() {
+      alert("Cache is ready to use");
+      alert(getDataFromCache('myKey'));
+  },
+  // Error function
+  function(err) {
+      alert("Cache failed to load");
+  });
+
+function getDataFromCache(key) {
+  return cache.getItem(key);
+}
+```
+
+#### setExcludedKeys
+
+```javascript
+setExcludedKeys(keys: string[])
+```
+
+Prevent certain keys from being persisted.
+
++ __keys__: A string array of keys which will not be persisted along with other keys
+
+Examples
+```javascript
+// The keys to exclude from persistent storage
+var excludedKeys = ['key1', 'key3'];
+
+cache.setExcludedKeys(excludedKeys);
+
+// Some content to store
+var content1 = "My Content 1";
+var content2 = "My Content 2";
+var content3 = "My Content 3";
+
+// Not persisted
+cache.setItem('key1', content1).then(function() {}, function(err) {});
+
+// Persisted
+cache.setItem('key2', content1).then(function() {}, function(err) {});
+
+// Not persisted
+cache.setItem('key3', content1).then(function() {}, function(err) {});
+```
+
+#### setItem
+
+```javascript
+setItem(key: string, value: any)
+```
+
+Write content to the cache with a key. Returns a promise.
+
++ __key__: The key to store the content against
++ __value__: The content to store
+
+Examples
+```javascript
 // The key to store the content against
 var key = "myKey";
 // The content to store
@@ -64,20 +127,12 @@ cache.setItem(key, content).then(
 getItem(key: string)
 ```
 
-Read content from the cache with a key
+Read content from the cache with a key. Returns a string value of the content set against the key, or a blank string if the key is empty or non existent.
 
 + __key__: The key to read the content from
 
 Examples
 ```javascript
-// Set the persistent storage to true to store the content until we specifically delete it
-var options = {
-    usePersistentStorage: true
-};
-
-// Create an instance of AWCache with our options
-var cache = new Appworks.AWCache(options);
-
 // The key to read the content from
 var key = "myKey";
 
@@ -94,20 +149,12 @@ alert(content);
 removeItem(key: string)
 ```
 
-Delete content from the cache with a key
+Delete content from the cache with a key. Returns a promise.
 
 + __key__: The key (and value) to be delete
 
 Examples
 ```javascript
-// Set the persistent storage to true to store the content until we specifically delete it
-var options = {
-    usePersistentStorage: true
-};
-
-// Create an instance of AWCache with our options
-var cache = new Appworks.AWCache(options);
-
 // The key to delete the content from
 var key = "myKey";
 
@@ -129,18 +176,10 @@ cache.removeItem(key).then(
 clear()
 ```
 
-Clear all content from the cache
+Clear all content from the cache. Returns a promise.
 
 Examples
 ```javascript
-// Set the persistent storage to true to store the content until we specifically delete it
-var options = {
-    usePersistentStorage: true
-};
-
-// Create an instance of AWCache with our options
-var cache = new Appworks.AWCache(options);
-
 // Call the clear function to remove all content
 cache.clear().then(
   // Success function
